@@ -1,0 +1,16 @@
+//- div(*ngFor="let error of errors") {{ error.name }}: {{ error.description }}
+//- 
+//- h1 {{title}}
+//- p  Useres:
+//- ul
+//-     li(*ngFor="let user of useres") {{ user.name }}
+//- 
+//- p&attributes({'*ngIf':'useres.length > 3'}) There are many useres!
+//- button&attributes({'#btn': '', "(click)":"clickme($event)"}) Click
+//- br
+//- {{ clickMessage }}
+//- br
+//- input(#username='')
+//- button((click)="addUser($event, username.value)") Add User
+
+router-outlet
