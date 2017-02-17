@@ -9,34 +9,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var user_1 = require('./models/user');
 var AppComponent = (function () {
     function AppComponent() {
-        this.title = 'Users';
-        this.useres = [
-            new user_1.User(1, "Windstorm", "me@example.com"),
-            new user_1.User(13, "Bombasto", "me@example.com"),
-            new user_1.User(15, "Magneta", "me@example.com"),
-            new user_1.User(20, "Tornedo", "me@example.com")
-        ];
-        this.myUser = this.useres[0];
-        this.clickMessage = '';
-        this.errors = new Array();
     }
-    AppComponent.prototype.clickme = function (event) {
-        this.clickMessage = "hey you clicked me!";
-        console.log("clicked");
-        event.preventDefault();
-    };
-    AppComponent.prototype.addUser = function (event, username) {
-        this.errors = new Array();
-        if (username != '') {
-            this.useres.push(new user_1.User(25, username, "me@example.com"));
-        }
-        else {
-            this.errors.push({ name: 'username', description: 'username cannot be empty!' });
-        }
-    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'myapp',

@@ -9,16 +9,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-//import { User } from './models/user';
+var user_service_1 = require('../../services/user.service');
 var CompanyComponent = (function () {
-    function CompanyComponent() {
+    function CompanyComponent(userService) {
+        this.userService = userService;
+        this.users = [];
     }
+    CompanyComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        // get users from secure api end point
+        this.userService.getUsers()
+            .subscribe(function (users) {
+            _this.users = users;
+        });
+    };
     CompanyComponent = __decorate([
         core_1.Component({
+            moduleId: module.id,
             selector: 'login',
-            templateUrl: "app/templates/company/app.company.component.html"
+            templateUrl: "../../templates/company/app.company.component.html"
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [user_service_1.UserService])
     ], CompanyComponent);
     return CompanyComponent;
 }());
