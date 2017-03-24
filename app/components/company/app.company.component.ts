@@ -1,23 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../models/user';
-import { UserService } from '../../services/user.service';
+import { Company } from '../../models/Company';
+import { CompanyService } from '../../services/company.service';
+import { KeysPipe } from '../../pipes/keys.pipe';
 
 @Component({
     moduleId: module.id,
-    selector: 'login',
-    templateUrl: `../../templates/company/app.company.component.html`
+    templateUrl: `../../templates/company/app.company.component.html`,
+    providers: [ CompanyService, KeysPipe ]
 })
 
 export class CompanyComponent implements OnInit {
-    users: User[] = [];
+    companies: Company[] = [];
 
-    constructor(private userService: UserService) { }
+    constructor(private companyService: CompanyService) { }
 
     ngOnInit() {
-        // get users from secure api end point
-        this.userService.getUsers()
-            .subscribe(users => {
-                this.users = users;
+        // get companies from secure api end point
+        this.companyService.getCompanies()
+            .subscribe(companies => {
+                this.companies = companies;
             });
     }
 }

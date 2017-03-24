@@ -1,0 +1,57 @@
+.ui.grid(*ngIf!='sectors')
+    .two.column.row
+        .column
+            h2 Signup candidat
+            .ui.tiny.visible.error.message(*ngIf='candidatError') {{candidatError}}
+            form.ui.form(name='form', (ngSubmit)!="fc.form.valid && (fc.controls.password.value == fc.controls.passwordconfirm.value) && signupCandidat(modelCandidat)", #fc='ngForm', novalidate='')
+                .field([ngClass]!="{ 'has-error': fc.submitted && !fc.controls.email.valid }")
+                    label(for='email') Email
+                    input(type='email', name='email', [(ngModel)]='modelCandidat.email', #email='ngModel', required='', pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$")
+                    .ui.tiny.visible.error.message(*ngIf!="fc.submitted && fc.controls.email.errors?.required") Email is required
+                    .ui.tiny.visible.error.message(*ngIf!="fc.submitted && fc.controls.email.errors?.pattern") Invalid Email Address
+                
+                .field([ngClass]!="{ 'has-error': fc.submitted && !fc.controls.sector.valid }")
+                    label(for='sector') Sector
+                    select.ui.fluid.dropdown(name='sector', [(ngModel)]='modelCandidat.sector', #password='ngModel', required='')
+                        option(value="", [selected]='true') -- No Option --
+                        option(*ngFor!='let scr of sectors', [value]='scr.id') {{scr.nom}}
+                    .ui.tiny.visible.error.message(*ngIf!='fc.submitted && !fc.controls.sector.valid') Sector is required
+                
+                .field([ngClass]!="{ 'has-error': fc.submitted && !fc.controls.password.valid }")
+                    label(for='password') Password
+                    input(type='password', name='password', [(ngModel)]='modelCandidat.password', #password='ngModel', required='')
+                    .ui.tiny.visible.error.message(*ngIf!='fc.submitted && !fc.controls.password.valid') Password is required
+                
+                .field([ngClass]!="{ 'has-error': fc.submitted && (!fc.controls.passwordconfirm.valid || (fc.controls.password.value != fc.controls.passwordconfirm.value)) }")
+                    label(for='passwordconfirm') Confirm Password
+                    input(type='password', name='passwordconfirm', [(ngModel)]='modelCandidat.passwordconfirm', #passwordconfirm='ngModel', required='', validateEqual="password")
+                    .ui.tiny.visible.error.message(*ngIf!='fc.submitted && !fc.controls.passwordconfirm.valid') Confirm password is required
+                    .ui.tiny.visible.error.message(*ngIf!='fc.submitted && fc.controls.passwordconfirm.valid && (fc.controls.password.value != fc.controls.passwordconfirm.value)') Password does not match
+
+                .field
+                    button.ui.button([disabled]='loadingCandidat') Login
+                    img(*ngIf='loadingCandidat', src='data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==')
+
+        .column
+            h2 Signup Recruter
+            .ui.tiny.visible.error.message(*ngIf='recruterError') {{recruterError}}
+            form.ui.form(name='form', (ngSubmit)!="frc.form.valid && (frc.controls.password.value == frc.controls.passwordconfirm.value) && signupRecruter(modelRecruter)", #frc='ngForm', novalidate='')
+                .field([ngClass]!="{ 'has-error': frc.submitted && !frc.controls.email.valid }")
+                    label(for='email') Email
+                    input(type='text', name='email', [(ngModel)]='modelRecruter.email', #email='ngModel', required='')
+                    .ui.tiny.visible.error.message(*ngIf!="frc.submitted && !frc.controls.email.valid") Email is required
+                .field([ngClass]!="{ 'has-error': frc.submitted && !frc.controls.password.valid }")
+                    label(for='password') Password
+                    input(type='password', name='password', [(ngModel)]='modelRecruter.password', #password='ngModel', required='')
+                    .ui.tiny.visible.error.message(*ngIf!='frc.submitted && !frc.controls.password.valid') Password is required
+                
+                .field([ngClass]!="{ 'has-error': frc.submitted && (!frc.controls.passwordconfirm.valid || (frc.controls.password.value != frc.controls.passwordconfirm.value)) }")
+                    label(for='passwordconfirm') Confirm Password
+                    input(type='password', name='passwordconfirm', [(ngModel)]='modelRecruter.passwordconfirm', #passwordconfirm='ngModel', required='', validateEqual="password")
+                    .ui.tiny.visible.error.message(*ngIf!='frc.submitted && !frc.controls.passwordconfirm.valid') Confirm password is required
+                    .ui.tiny.visible.error.message(*ngIf!='frc.submitted && frc.controls.passwordconfirm.valid && (frc.controls.password.value != frc.controls.passwordconfirm.value)') Password does not match
+
+                .field
+                    button.ui.button([disabled]='loadingRecruter') Login
+                    img(*ngIf='loadingRecruter', src='data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==')
+                    

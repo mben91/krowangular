@@ -9,27 +9,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var user_service_1 = require('../../services/user.service');
+var company_service_1 = require('../../services/company.service');
+var keys_pipe_1 = require('../../pipes/keys.pipe');
 var CompanyComponent = (function () {
-    function CompanyComponent(userService) {
-        this.userService = userService;
-        this.users = [];
+    function CompanyComponent(companyService) {
+        this.companyService = companyService;
+        this.companies = [];
     }
     CompanyComponent.prototype.ngOnInit = function () {
         var _this = this;
-        // get users from secure api end point
-        this.userService.getUsers()
-            .subscribe(function (users) {
-            _this.users = users;
+        // get companies from secure api end point
+        this.companyService.getCompanies()
+            .subscribe(function (companies) {
+            _this.companies = companies;
         });
     };
     CompanyComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'login',
-            templateUrl: "../../templates/company/app.company.component.html"
+            templateUrl: "../../templates/company/app.company.component.html",
+            providers: [company_service_1.CompanyService, keys_pipe_1.KeysPipe]
         }), 
-        __metadata('design:paramtypes', [user_service_1.UserService])
+        __metadata('design:paramtypes', [company_service_1.CompanyService])
     ], CompanyComponent);
     return CompanyComponent;
 }());

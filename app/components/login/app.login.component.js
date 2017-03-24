@@ -21,18 +21,18 @@ var LoginComponent = (function () {
     }
     LoginComponent.prototype.ngOnInit = function () {
         // reset login status
-        this.authenticationService.logout();
+        // this.authenticationService.logout();
     };
     LoginComponent.prototype.login = function () {
         var _this = this;
         this.loading = true;
-        this.authenticationService.login(this.model.username, this.model.password)
+        this.authenticationService.login(this.model.email, this.model.password)
             .subscribe(function (result) {
             if (result === true) {
-                _this.router.navigate(['/company']);
+                _this.router.navigate(['/company/list']);
             }
             else {
-                _this.error = 'Username or password is incorrect';
+                _this.error = 'Email or password is incorrect';
                 _this.loading = false;
             }
         });
@@ -40,7 +40,8 @@ var LoginComponent = (function () {
     LoginComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            templateUrl: '../../templates/login/app.login.component.html'
+            templateUrl: '../../templates/login/app.login.component.html',
+            styleUrls: ['/app/assets/login.css']
         }), 
         __metadata('design:paramtypes', [router_1.Router, user_auth_service_1.AuthenticationService])
     ], LoginComponent);

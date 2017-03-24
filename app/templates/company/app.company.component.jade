@@ -1,10 +1,19 @@
 .col-md-6.col-md-offset-3
-    h1 Home
-    p You're logged in with JWT!!
+    h1 Company List
+    p You're logged in!!
     div
-        | Users from secure api end point:
-        ul
-            li(*ngFor="let user of users") {{user.firstName}} {{user.lastName}}
+        | List of Companies:
+
+        table(border=1, cellspacing=0)
+            thead
+                th nom
+                th presentation
+                th status
+            tbody
+                tr(*ngFor="let company of companies")
+                    td {{company.nom}}
+                    td {{company.presentation}}
+                    td {{company.status}}
         
     p
-        a([routerLink]="['/login']") Logout
+        a([routerLink]="['/logout']") Logout
